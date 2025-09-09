@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Clock, User, ChevronDown } from "lucide-react"
-import { type Newsletter, categories } from "@/lib/newsletter-data"
+import { type Newsletter, categories, getNewsletterDateUrl } from "@/lib/newsletter-data"
 
 interface ArchiveNewsletterListProps {
   newsletters: Newsletter[]
@@ -87,7 +87,7 @@ export function ArchiveNewsletterList({ newsletters, totalCount }: ArchiveNewsle
                 </div>
 
                 <h3 className="text-lg font-semibold text-balance mb-3 group-hover:text-primary transition-colors line-clamp-2">
-                  <Link href={`/newsletter/${newsletter.slug}`}>{content.title}</Link>
+                  <Link href={getNewsletterDateUrl(newsletter)}>{content.title}</Link>
                 </h3>
 
                 <p className="text-sm text-muted-foreground mb-4 line-clamp-3 leading-relaxed">{content.excerpt}</p>

@@ -11,12 +11,20 @@ import { sampleNewsletters } from "@/lib/newsletter-data"
 
 interface NewsletterPageProps {
   params: {
+    year: string
+    month: string
     slug: string
   }
 }
 
 export async function generateMetadata({ params }: NewsletterPageProps): Promise<Metadata> {
-  const newsletter = sampleNewsletters.find((n) => n.slug === params.slug)
+  const newsletter = sampleNewsletters.find((n) => {
+    const publishDate = new Date(n.publishedAt)
+    const year = publishDate.getFullYear().toString()
+    const month = (publishDate.getMonth() + 1).toString().padStart(2, '0')
+    
+    return year === params.year && month === params.month && n.slug === params.slug
+  })
 
   if (!newsletter) {
     return {
@@ -45,13 +53,27 @@ export async function generateMetadata({ params }: NewsletterPageProps): Promise
 }
 
 export async function generateStaticParams() {
-  return sampleNewsletters.map((newsletter) => ({
-    slug: newsletter.slug,
-  }))
+  return sampleNewsletters.map((newsletter) => {
+    const publishDate = new Date(newsletter.publishedAt)
+    const year = publishDate.getFullYear().toString()
+    const month = (publishDate.getMonth() + 1).toString().padStart(2, '0')
+    
+    return {
+      year,
+      month,
+      slug: newsletter.slug,
+    }
+  })
 }
 
 export default function NewsletterPage({ params }: NewsletterPageProps) {
-  const newsletter = sampleNewsletters.find((n) => n.slug === params.slug)
+  const newsletter = sampleNewsletters.find((n) => {
+    const publishDate = new Date(n.publishedAt)
+    const year = publishDate.getFullYear().toString()
+    const month = (publishDate.getMonth() + 1).toString().padStart(2, '0')
+    
+    return year === params.year && month === params.month && n.slug === params.slug
+  })
 
   if (!newsletter) {
     notFound()

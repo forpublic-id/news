@@ -18,7 +18,7 @@ export function MainStory() {
             <span className="text-xs font-bold text-red-600 uppercase tracking-wider">{mainStory.category}</span>
           </div>
           <h1 className="font-serif text-4xl lg:text-5xl font-bold leading-tight mb-4 text-gray-900">
-            <Link href={`/newsletter/${mainStory.slug}`} className="hover:text-gray-700">
+            <Link href={mainStory.url} className="hover:text-gray-700">
               {mainStory.title}
             </Link>
           </h1>
@@ -34,7 +34,7 @@ export function MainStory() {
           </div>
         </div>
         <div className="lg:order-first">
-          <Link href={`/newsletter/${mainStory.slug}`}>
+          <Link href={mainStory.url}>
             <Image
               src={mainStory.image || "/placeholder.svg"}
               alt={mainStory.title}

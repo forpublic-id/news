@@ -20,7 +20,7 @@ export function NewsGrid() {
               <span className="text-xs font-bold text-red-600 uppercase tracking-wider">{story.category}</span>
             </div>
             <h2 className="font-serif text-xl font-bold leading-tight">
-              <Link href={`/newsletter/${story.slug}`} className="hover:text-gray-700">
+              <Link href={story.url} className="hover:text-gray-700">
                 {story.title}
               </Link>
             </h2>
@@ -39,7 +39,7 @@ export function NewsGrid() {
         {newsletters.slice(7, 12).map((story) => (
           <article key={story.id} className="flex gap-4 pb-4 border-b border-gray-100">
             <div className="flex-shrink-0">
-              <Link href={`/newsletter/${story.slug}`}>
+              <Link href={story.url}>
                 <Image
                   src={story.image || "/placeholder.svg"}
                   alt={story.title}
@@ -54,7 +54,7 @@ export function NewsGrid() {
                 <span className="text-xs font-bold text-red-600 uppercase tracking-wider">{story.category}</span>
               </div>
               <h3 className="font-serif text-lg font-bold leading-tight">
-                <Link href={`/newsletter/${story.slug}`} className="hover:text-gray-700">
+                <Link href={story.url} className="hover:text-gray-700">
                   {story.title}
                 </Link>
               </h3>

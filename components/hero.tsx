@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Clock, User } from "lucide-react"
-import { sampleNewsletters } from "@/lib/newsletter-data"
+import { sampleNewsletters, getNewsletterDateUrl } from "@/lib/newsletter-data"
 import { useLanguage } from "@/contexts/language-context"
 
 export function Hero() {
@@ -58,7 +58,7 @@ export function Hero() {
                 </div>
 
                 <Button asChild>
-                  <Link href={`/newsletter/${featuredNewsletter.slug}`}>{t.homepage.readMore}</Link>
+                  <Link href={getNewsletterDateUrl(featuredNewsletter)}>{t.homepage.readMore}</Link>
                 </Button>
               </div>
             </CardContent>

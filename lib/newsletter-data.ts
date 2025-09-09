@@ -260,6 +260,7 @@ export function getNewsletters(language: "id" | "en"): Array<{
   featured: boolean
   image?: string
   imageCaption?: string
+  url: string
 }> {
   return sampleNewsletters.map((newsletter) => ({
     id: newsletter.id,
@@ -274,6 +275,7 @@ export function getNewsletters(language: "id" | "en"): Array<{
     featured: newsletter.featured,
     image: newsletter.image,
     imageCaption: newsletter.imageCaption,
+    url: getNewsletterDateUrl(newsletter),
   }))
 }
 
@@ -311,4 +313,39 @@ export function getNewsletterBySlug(slug: string, language: "id" | "en") {
     image: newsletter.image,
     imageCaption: newsletter.imageCaption,
   }
+}
+
+export function getNewsletterByDateAndSlug(year: string, month: string, slug: string, language: "id" | "en") {
+  const newsletter = sampleNewsletters.find((n) => {
+    const publishDate = new Date(n.publishedAt)
+    const newsletterYear = publishDate.getFullYear().toString()
+    const newsletterMonth = (publishDate.getMonth() + 1).toString().padStart(2, '0')
+    
+    return newsletterYear === year && newsletterMonth === month && n.slug === slug
+  })
+  
+  if (!newsletter) return null
+
+  return {
+    id: newsletter.id,
+    slug: newsletter.slug,
+    title: newsletter.content[language].title,
+    subtitle: newsletter.content[language].subtitle,
+    excerpt: newsletter.content[language].excerpt,
+    author: newsletter.content[language].author,
+    publishDate: newsletter.content[language].publishDate,
+    category: newsletter.category,
+    readTime: newsletter.readTime,
+    featured: newsletter.featured,
+    image: newsletter.image,
+    imageCaption: newsletter.imageCaption,
+  }
+}
+
+export function getNewsletterDateUrl(newsletter: Newsletter): string {
+  const publishDate = new Date(newsletter.publishedAt)
+  const year = publishDate.getFullYear()
+  const month = (publishDate.getMonth() + 1).toString().padStart(2, '0')
+  
+  return `/${year}/${month}/${newsletter.slug}`
 }

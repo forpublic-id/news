@@ -24,7 +24,7 @@ export function Sidebar() {
               </span>
               <div className="flex-1">
                 <h4 className="font-serif text-sm font-bold leading-tight mb-1">
-                  <Link href={`/newsletter/${story.slug}`} className="hover:text-gray-700">
+                  <Link href={`${story.url}`} className="hover:text-gray-700">
                     {story.title}
                   </Link>
                 </h4>
@@ -71,7 +71,7 @@ export function Sidebar() {
         <div className="space-y-4">
           {sidebarStories.slice(3).map((story) => (
             <article key={story.id} className="space-y-2">
-              <Link href={`/newsletter/${story.slug}`}>
+              <Link href={`${story.url}`}>
                 <Image
                   src={story.image || "/placeholder.svg"}
                   alt={story.title}
@@ -84,7 +84,7 @@ export function Sidebar() {
                 <span className="text-xs font-bold text-red-600 uppercase tracking-wider">{story.category}</span>
               </div>
               <h4 className="font-serif text-sm font-bold leading-tight">
-                <Link href={`/newsletter/${story.slug}`} className="hover:text-gray-700">
+                <Link href={`${story.url}`} className="hover:text-gray-700">
                   {story.title}
                 </Link>
               </h4>

@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Clock, User, ArrowRight } from "lucide-react"
-import { sampleNewsletters, categories } from "@/lib/newsletter-data"
+import { sampleNewsletters, categories, getNewsletterDateUrl } from "@/lib/newsletter-data"
 import { useLanguage } from "@/contexts/language-context"
 
 export function RecentNewsletters() {
@@ -64,7 +64,7 @@ export function RecentNewsletters() {
                   </div>
 
                   <h3 className="text-lg font-semibold text-balance mb-2 group-hover:text-primary transition-colors line-clamp-2">
-                    <Link href={`/newsletter/${newsletter.slug}`}>{content.title}</Link>
+                    <Link href={`getNewsletterDateUrl(newsletter)`}>{content.title}</Link>
                   </h3>
 
                   <p className="text-sm text-muted-foreground mb-4 line-clamp-3 leading-relaxed">{content.excerpt}</p>
